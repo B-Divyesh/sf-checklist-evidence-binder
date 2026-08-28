@@ -1,0 +1,15 @@
+{
+  "name": "Proofbook — Offline evidence binder",
+  "short_name": "Proofbook",
+  "description": "Repeat checks, attach proof, and export a private evidence binder.",
+  "id": "/",
+  "start_url": "/?source=installed&v=1",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f2ebd8",
+  "theme_color": "#f2ebd8",
+  "icons": [
+    {"src":"/icons/icon-192.png","sizes":"192x192","type":"image/png","purpose":"any"},
+    {"src":"/icons/icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
+  ]
+}

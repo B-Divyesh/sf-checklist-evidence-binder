@@ -1,0 +1,9 @@
+{
+  "generator": "/opt/fleet/lib/gen-image.sh",
+  "deployment": "factory-image",
+  "date": "2026-08-28",
+  "size": "1024x1024",
+  "quality": "high",
+  "prompt": "Use case: stylized-concept. Asset type: Proofbook PWA editorial hero. Top-down still life of a blank unbranded compact cassette used as an evidence archive, an inspection checklist with empty square marks, two instant-photo contact sheets showing abstract equipment details, paper clips and a small date stamp. Cassette-era DIY zine, cut-paper collage, risograph ink, photocopied halftone grain, imperfect registration, tactile off-white paper. Strong graphic composition with the cassette centered and clean negative space around the edges. Oxide red, fluorescent chartreuse, deep teal, black, warm cream. No readable text, no people, no hands, no logos, no brands, no watermark, no compliance seals, no gradients, no glossy 3D render.",
+  "review": "Accepted: cassette and stationery geometry are coherent; checklist is blank; stamp contains no readable date; no people, brands, logos, seals, or watermark; palette and grain match the visual thesis."
+}
