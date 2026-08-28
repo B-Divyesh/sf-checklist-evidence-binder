@@ -1,4 +1,26 @@
-# Proofbook build handoff
+# Proofbook verification handoff — FAIL
+
+Verification work order: `checklist-evidence-binder-verify-1`
+Verified candidate: `30431363119a813f999a2c9ce4d07763ebe1129c`
+Verified live URL: https://checklist-evidence-binder.sociobot.in
+Date: 2026-08-28
+
+**Do not release this candidate.** A malformed but accepted JSON backup can
+overwrite the encrypted binder and make it impossible to unlock through the
+product UI. See `.factory/verification.md` for the exact payload and
+reproduction. The report also records the hidden 390 px Lock binder action,
+short deployment cache lifetime, and missing response-hardening policies.
+
+Verification completed without product-code changes. `npm ci`, `npm test`
+(3/3), the exact `npm run build`, and `npm run test:e2e` (6/6) pass, and the
+live static files exactly match the candidate. The normal full workflow,
+offline PWA reload, mobile/desktop axe scans, privacy/outbound-request check,
+keyboard/focus check, and Lighthouse audit were also run. Passing gates do not
+override the critical recovery/data-integrity failure.
+
+---
+
+# Original build handoff (superseded by verification result)
 
 Work order: `checklist-evidence-binder-build-1`
 Completed: 2026-08-28
