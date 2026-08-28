@@ -24,7 +24,14 @@ export function exportBackup(binder: Binder): void {
 export async function exportEvidence(binder: Binder): Promise<string> {
   const completed = binder.records.filter(r => r.status === 'complete');
   const exportedAt = new Date().toISOString();
-  const manifest = completed.map(record => ({ id: record.id, procedureId: record.procedureId, dueAt: record.dueAt, completedAt: record.completedAt, signedBy: record.signedBy, files: Object.values(record.evidence).map(file => ({ name: file.name, type: file.type, size: file.size, addedAt: file.addedAt })) }));
+  const manifest = await Promise.all(completed.map(async record => ({
+    id: record.id,
+    procedureId: record.procedureId,
+    dueAt: record.dueAt,
+    completedAt: record.completedAt,
+    signedBy: record.signedBy,
+    files: await Promise.all(Object.values(record.evidence).map(async file => ({ name: file.name, type: file.type, size: file.size, addedAt: file.addedAt, contentSha256: await fingerprint(file.data) })))
+  })));
   const hash = await fingerprint({ exportedAt, manifest });
   const procedureFor = (record: CheckRecord): Procedure | undefined => binder.procedures.find(p => p.id === record.procedureId);
   const sections = completed.map(record => {
