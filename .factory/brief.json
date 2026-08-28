@@ -1,0 +1,9 @@
+{
+  "slug": "checklist-evidence-binder",
+  "title": "Proofbook",
+  "artifact_class": "pwa-offline",
+  "user": "A tiny regulated or safety-conscious business that must repeat checks and show supporting evidence later.",
+  "smallest_useful_product": "Offline PWA with repeatable check cards, required evidence slots, completion/sign-off timestamps, overdue view, and a read-only evidence-bundle export.",
+  "monetization": "one-time",
+  "constraints": "No compliance claims or jurisdictional advice; encryption, retention/deletion controls, and export integrity are required."
+}
