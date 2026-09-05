@@ -98,3 +98,13 @@ Proofbook and used under the product's MIT license. Candidate review checks:
 no legible pseudo-text, accidental brands, official seals, misleading UI, or
 broken object geometry.
 
+The 1200 × 630 social card is a local crop-and-mat derivative of that reviewed
+source image. The 180 px Apple touch icon is resized from the hand-authored app
+icon. No new third-party asset was introduced in repair 1.
+
+## Route and error treatment
+
+The app routes use numbered binder tabs, while legal pages keep the same ruled
+header and footer. The 404 page uses a skewed fluorescent `404` label and a
+plain return action. This keeps the error recognizable without using a generic
+illustration or a second visual system.

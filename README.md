@@ -1,65 +1,100 @@
 # Proofbook
 
-Proofbook is a private, offline evidence binder for tiny regulated or
-safety-conscious teams. It turns a small operating procedure into repeatable
-checks with required evidence slots, due dates, sign-off timestamps, an overdue
-queue, and a read-only evidence bundle for clients, managers, or inspectors.
+Proofbook helps small regulated or safety-conscious teams repeat checks, attach
+required evidence, and show signed records later. The PWA keeps one encrypted
+binder in the browser and works offline after its first visit.
 
-It is a recordkeeping tool—not a compliance certification service or source of
+It is a recordkeeping tool. It does not certify compliance or provide legal or
 jurisdictional advice.
 
-Live: https://checklist-evidence-binder.sociobot.in
+Live product: <https://checklist-evidence-binder.sociobot.in>
+
+One-click sample: <https://checklist-evidence-binder.sociobot.in/demo/>
+
+## Try the sample
+
+Open `/demo/` to see a completed cold-room check, its two evidence files, the
+next daily check, and an overdue fire-exit walk. The persistent demo banner
+offers **Reset demo** and **Start for real**. Demo changes stay in memory and do
+not read or write the real IndexedDB vault.
 
 ## What it does
 
-- Encrypts the complete binder in browser IndexedDB using AES-GCM and a key
-  derived from the user's passphrase. The passphrase is never stored.
-- Schedules daily, weekly, or monthly check cycles and carries the next cycle
-  forward after completion.
-- Requires each named evidence slot to have a photo/document before sign-off.
-- Keeps a local audit trail and applies a selectable evidence-file retention
-  policy while preserving check metadata.
-- Exports/imports a portable JSON backup and exports a standalone, read-only
-  HTML evidence report with a SHA-256 manifest fingerprint.
-- Installs as a PWA and reloads without a network connection.
+- Encrypts the binder payload in browser IndexedDB with AES-GCM. The key comes
+  from the passphrase, which is not stored.
+- Schedules daily, weekly, and monthly checks. Required files block completion.
+- Keeps due, completion, and sign-off times with an overdue view.
+- Keeps material changes in the encrypted binder activity list.
+- Removes expired file contents while preserving filenames and record history.
+- Downloads and restores JSON backups after full nested-schema validation.
+- Downloads a standalone evidence report with its exact manifest and per-file
+  SHA-256 values.
+- Lets the owner download or remove completed files and erase the full binder.
+- Installs as a standalone PWA and reloads offline after the first visit.
 
-The free edition supports two active procedures and all core evidence, safety,
-accessibility, and export features. A US$29 one-time Proofbook Plus license
-unlocks unlimited procedures and custom retention periods through the Sociobot
-billing API. No product ID or payment-provider integration lives in this repo.
+All features in this release are free to use. The researched business model is
+a one-time purchase, but the external product checkout is not registered. No
+dead purchase link or mock payment flow is shown.
 
-## Develop and verify
+## Privacy and recovery
+
+Normal binder use sends no record data to a server and loads no third-party
+runtime resources. There are no analytics or tracking calls. Browser storage
+is the only source of truth, so keep protected JSON backups. A lost passphrase
+cannot be recovered.
+
+An invalid backup is rejected before confirmation or storage. If legacy local
+data decrypts but fails validation, the unlock screen offers valid-backup
+restore and full erase actions.
+
+See the [privacy notice](https://checklist-evidence-binder.sociobot.in/privacy/)
+and [terms](https://checklist-evidence-binder.sociobot.in/terms/).
+
+## Clean setup and verification
 
 Requires Node.js 20 or newer.
 
 ```sh
+git clone https://github.com/B-Divyesh/sf-checklist-evidence-binder.git
+cd sf-checklist-evidence-binder
 npm ci
-npm run dev
 npm test
 npm run build
 npm run test:e2e
 ```
 
-The production build command is exactly `npm run build`; it writes the static
-site to `dist/`, with `dist/index.html` at the root. Playwright is pinned to
-1.58.2. If the bundled browser is unavailable, run
-`npx playwright install chromium` once.
+`npm run build` writes the complete static site to `dist/`, with
+`dist/index.html` at its root. `npm run test:e2e` rebuilds before running the
+desktop and 390 × 844 browser projects. Playwright is pinned to 1.58.2. If its
+browser is not available, run `npx playwright install chromium` once.
 
-`npm run check` runs unit tests, the production build, and desktop/mobile
-browser tests. Preview a build with `npm run preview`.
+Every public product claim is registered in `.factory/claims.json`. Run any
+claim exactly as recorded there, or run the full Chromium claim set:
 
-## Privacy and recovery
+```sh
+npm run test:claims
+```
 
-No analytics, fonts, or scripts are loaded from third parties. Ordinary binder
-use makes no network requests. License purchase/verification is the only
-optional remote operation. Clearing browser site data erases the binder, and a
-lost passphrase cannot be recovered, so users should keep protected backups.
-See the in-product [privacy notice](https://checklist-evidence-binder.sociobot.in/privacy/)
-and [terms](https://checklist-evidence-binder.sociobot.in/terms/).
+## Preview and deploy
 
-The researched scope is in `.factory/brief.json`; the product-specific visual
-system and generated-asset provenance are in `.factory/design.md`.
+```sh
+npm run build
+npm run preview
+```
 
-## License
+The preview server serves the same route and header behavior used by browser
+tests. Factory deployment uses the product-scoped static app and generated
+`dist/staticwebapp.config.json`:
 
-MIT. See `LICENSE`.
+```sh
+/opt/fleet/lib/deploy-static.sh checklist-evidence-binder dist
+```
+
+The deployment helper owns only `sf-checklist-evidence-binder` and the product
+subdomain. Infrastructure and billing registration stay outside this repo.
+
+## Design and license
+
+The researched scope is in `.factory/brief.json`. The visual system and image
+provenance are in `.factory/design.md`. Proofbook is MIT licensed; see
+`LICENSE`.

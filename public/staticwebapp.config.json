@@ -1,0 +1,29 @@
+{
+  "routes": [
+    { "route": "/checks", "rewrite": "/index.html" },
+    { "route": "/overdue", "rewrite": "/index.html" },
+    { "route": "/history", "rewrite": "/index.html" },
+    { "route": "/settings", "rewrite": "/index.html" },
+    { "route": "/demo", "rewrite": "/demo/index.html" },
+    { "route": "/privacy", "rewrite": "/privacy/index.html" },
+    { "route": "/terms", "rewrite": "/terms/index.html" },
+    { "route": "/assets/*", "headers": { "Cache-Control": "public, max-age=31536000, immutable" } },
+    { "route": "/icons/*", "headers": { "Cache-Control": "public, max-age=86400" } },
+    { "route": "/sw.js", "headers": { "Cache-Control": "no-cache, no-store, must-revalidate" } },
+    { "route": "/manifest.webmanifest", "headers": { "Cache-Control": "public, max-age=3600" } }
+  ],
+  "responseOverrides": {
+    "404": { "rewrite": "/404.html" }
+  },
+  "globalHeaders": {
+    "Cache-Control": "public, max-age=60, must-revalidate",
+    "Content-Security-Policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests",
+    "Permissions-Policy": "camera=(self), geolocation=(), microphone=(), payment=(), usb=()",
+    "Referrer-Policy": "no-referrer",
+    "X-Content-Type-Options": "nosniff",
+    "X-Frame-Options": "DENY"
+  },
+  "mimeTypes": {
+    ".webmanifest": "application/manifest+json"
+  }
+}

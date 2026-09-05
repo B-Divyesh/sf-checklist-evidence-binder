@@ -1,0 +1,100 @@
+[
+  {
+    "id": "demo-isolation",
+    "claim": "The one-click sample resets and does not change the visitor's real binder.",
+    "where": "landing action, demo banner, README",
+    "test": "npm run test:claims -- --grep @claim:demo-isolation",
+    "sandbox": "create a real encrypted binder, use and reset the in-memory demo, compare the encrypted vault byte-for-byte, then reopen the real binder"
+  },
+  {
+    "id": "encrypted-local",
+    "claim": "The binder payload is encrypted with AES-GCM in browser IndexedDB, and the passphrase is not stored.",
+    "where": "landing, unlock form, privacy, README",
+    "test": "npm run test:claims -- --grep @claim:encrypted-local",
+    "sandbox": "save a unique procedure, inspect localStorage and IndexedDB for plaintext, reload, unlock, and recover the procedure"
+  },
+  {
+    "id": "private-network",
+    "claim": "Normal binder use needs no account, sends no record data to a server, and loads no third-party runtime resources.",
+    "where": "landing, privacy, README",
+    "test": "npm run test:claims -- --grep @claim:private-network",
+    "sandbox": "record every request while reviewing and exporting sample evidence; require the product origin only"
+  },
+  {
+    "id": "offline-reload",
+    "claim": "Proofbook works offline after the first visit.",
+    "where": "landing, offline help, README",
+    "test": "npm run test:claims -- --grep @claim:offline-reload",
+    "sandbox": "use a dedicated browser context, load the demo, wait for service-worker control, switch offline, and reload the populated binder"
+  },
+  {
+    "id": "pwa-install",
+    "claim": "Proofbook provides an installable standalone PWA shell.",
+    "where": "README",
+    "test": "npm run test:claims -- --grep @claim:pwa-install",
+    "sandbox": "validate the served manifest, icons, standalone display mode, versioned start URL, and active service-worker control"
+  },
+  {
+    "id": "recurring-required-evidence",
+    "claim": "Required evidence blocks completion, and completion schedules the next daily, weekly, or monthly check.",
+    "where": "how it works, record dialog, README",
+    "test": "npm run test:claims -- --grep @claim:recurring-required-evidence",
+    "sandbox": "attempt completion without files, attach each required file, sign, complete, and observe the new open cycle"
+  },
+  {
+    "id": "signed-overdue-history",
+    "claim": "Proofbook shows overdue checks and keeps completion and sign-off timestamps.",
+    "where": "demo, README",
+    "test": "npm run test:claims -- --grep @claim:signed-overdue-history",
+    "sandbox": "open the sample overdue view and signed history, then assert the named operator and completed timestamp"
+  },
+  {
+    "id": "retention-history",
+    "claim": "Retention removes expired file contents while keeping filenames, checks, and sign-offs.",
+    "where": "binder setup, privacy, README",
+    "test": "npm run test:claims -- --grep @claim:retention-history",
+    "sandbox": "restore an old completed record, lock and unlock to apply retention, then review retained metadata and removed content"
+  },
+  {
+    "id": "backup-recovery",
+    "claim": "Proofbook exports and restores JSON backups, rejects invalid backups before replacement, and offers recovery for damaged local data.",
+    "where": "binder setup, recovery panel, README",
+    "test": "npm run test:claims -- --grep @claim:backup-recovery",
+    "sandbox": "export a valid backup, reject a nested malformed backup without confirmation, inject legacy corrupt encrypted data, and restore the valid backup"
+  },
+  {
+    "id": "export-integrity",
+    "claim": "The evidence report includes the exact manifest and per-file SHA-256 values needed to recompute integrity.",
+    "where": "how it works, binder setup, README",
+    "test": "npm run test:claims -- --grep @claim:export-integrity",
+    "sandbox": "download the sample report, hash the embedded manifest and linked file payload, compare both values, and prove a mutation differs"
+  },
+  {
+    "id": "file-control",
+    "claim": "A completed evidence file can be downloaded or removed while its filename remains in history.",
+    "where": "record review, privacy, README",
+    "test": "npm run test:claims -- --grep @claim:file-control",
+    "sandbox": "download a completed sample file, remove it, observe retained filename metadata, then reset the demo"
+  },
+  {
+    "id": "audit-trail",
+    "claim": "Material binder changes appear in a local encrypted activity list.",
+    "where": "binder setup, README",
+    "test": "npm run test:claims -- --grep @claim:audit-trail",
+    "sandbox": "add a named procedure in demo mode and observe that named change in recent binder activity"
+  },
+  {
+    "id": "free-features",
+    "claim": "All features in this release are free to use.",
+    "where": "landing, terms, README",
+    "test": "npm run test:claims -- --grep @claim:free-features",
+    "sandbox": "create a third active procedure, use custom retention, and verify there is no purchase or checkout control"
+  },
+  {
+    "id": "erase-binder",
+    "claim": "The binder owner can erase the complete local vault.",
+    "where": "binder setup, privacy, README",
+    "test": "npm run test:claims -- --grep @claim:erase-binder",
+    "sandbox": "create a real binder, erase it with confirmation, and assert the encrypted metadata and unlock screen are gone"
+  }
+]

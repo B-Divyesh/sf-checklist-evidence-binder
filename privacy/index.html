@@ -1,2 +1,44 @@
 <!doctype html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#f2ebd8"><title>Privacy — Proofbook</title><link rel="icon" href="/icons/icon.svg"><link rel="stylesheet" href="/src/style.css"></head><body><a class="skip-link" href="#main">Skip to content</a><header class="legal-header"><a href="/" class="wordmark">PROOF/BOOK</a></header><main id="main" class="legal"><p class="kicker">Privacy note · 28 August 2026</p><h1>Your binder stays yours.</h1><p>Proofbook stores procedures, history, names, notes, and evidence files locally in your browser’s IndexedDB. The binder payload is encrypted with AES-GCM using a key derived from your passphrase. We cannot recover your passphrase or binder.</p><h2>What leaves your device</h2><p>Nothing during ordinary use. If you buy or verify a license, your browser contacts the Sociobot billing API with the license token. Checkout is handled by Sociobot/Dodo, the merchant of record. Proofbook contains no analytics, advertising, third-party fonts, or tracking scripts.</p><h2>Your controls</h2><p>You can export a portable backup or a read-only evidence report, change retention, remove individual files, or permanently erase the binder. Browser site-data controls can also erase all local data.</p><h2>Contact</h2><p>Privacy questions: <a href="mailto:privacy@sociobot.in">privacy@sociobot.in</a>.</p><p><a href="/">Return to Proofbook</a></p></main></body></html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f2ebd8" />
+    <meta name="description" content="How Proofbook stores, encrypts, exports, and deletes your local evidence records." />
+    <link rel="canonical" href="https://checklist-evidence-binder.sociobot.in/privacy/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Privacy — Proofbook" />
+    <meta property="og:description" content="How Proofbook stores, encrypts, exports, and deletes your local evidence records." />
+    <meta property="og:url" content="https://checklist-evidence-binder.sociobot.in/privacy/" />
+    <meta property="og:image" content="https://checklist-evidence-binder.sociobot.in/assets/proofbook-social.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Privacy — Proofbook" />
+    <meta name="twitter:description" content="How Proofbook stores, encrypts, exports, and deletes your local evidence records." />
+    <meta name="twitter:image" content="https://checklist-evidence-binder.sociobot.in/assets/proofbook-social.png" />
+    <link rel="icon" href="/icons/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+    <link rel="stylesheet" href="/src/style.css" />
+    <title>Privacy — Proofbook</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <header class="app-header">
+      <a class="wordmark" href="/" aria-label="Proofbook home">PROOF<span>BOOK</span></a>
+      <nav class="site-nav" aria-label="Primary"><a href="/demo/">Demo</a><a href="/privacy/" aria-current="page">Privacy</a><a href="/terms/">Terms</a></nav>
+    </header>
+    <main id="main" class="legal">
+      <p class="kicker">Privacy · 5 September 2026</p>
+      <h1>Control your local evidence data</h1>
+      <p>Proofbook stores procedures, records, names, notes, and evidence files in this browser’s IndexedDB. The binder is encrypted with AES-GCM using a key derived from your passphrase.</p>
+      <h2>Network use</h2>
+      <p>Normal binder use sends no record data to a server. Proofbook has no analytics, advertising, remote fonts, or third-party scripts.</p>
+      <h2>Your controls</h2>
+      <p>You can download a JSON backup or evidence report. You can remove each retained file, set automatic file retention, or erase the full binder.</p>
+      <p>The passphrase is not stored or sent. Keep a protected backup because a lost passphrase cannot be recovered.</p>
+      <h2>Privacy requests</h2>
+      <p>All binder data is controlled in your browser. Use <strong>Erase this binder</strong> in Binder setup to delete it.</p>
+      <p>Questions about this notice can be sent to <a href="mailto:privacy@sociobot.in">privacy@sociobot.in</a>.</p>
+    </main>
+    <footer class="footer"><span>Repeat checks and keep the evidence on this device.</span><nav aria-label="Footer"><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></nav><span>Built by Param Factory · v1.1.0 · original generated artwork</span></footer>
+  </body>
+</html>

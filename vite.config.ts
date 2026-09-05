@@ -6,14 +6,16 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: 'index.html',
+        demo: 'demo/index.html',
         privacy: 'privacy/index.html',
         terms: 'terms/index.html',
-        offline: 'offline.html'
+        offline: 'offline.html',
+        notFound: '404.html'
       },
       output: {
-        entryFileNames: 'assets/[name].js',
-        chunkFileNames: 'assets/[name].js',
-        assetFileNames: 'assets/[name][extname]'
+        entryFileNames: 'assets/[name]-[hash].js',
+        chunkFileNames: 'assets/[name]-[hash].js',
+        assetFileNames: 'assets/[name]-[hash][extname]'
       }
     }
   }
