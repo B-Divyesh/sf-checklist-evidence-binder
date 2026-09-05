@@ -1,56 +1,56 @@
-# Proofbook repair 1 handoff
+# Proofbook repair 2 handoff
 
 Date: 2026-09-05
 
 Live URL: <https://checklist-evidence-binder.sociobot.in>
 
-Implementation SHA deployed: `55ec495d71f48c84a66fd5d041e811bcffb3c206`
+Implementation SHA deployed: `77b70aab31efb67a065f1d503ff90ca2c118ca4f`
 
-Documentation status: this handoff follows the implementation commit above.
+## What changed
 
-## Outcome
+The one-click sample now keeps its promise on its initial Open checks view.
+It shows a completed cold-room check, completion time, Rae Morgan’s sign-off,
+and two direct downloadable evidence files before the visitor opens History.
+The same view retains the overdue fire-exit check and the next cold-room check.
 
-The evidence-binder workflow is repaired and deployed. Users can create an
-encrypted local binder, schedule repeating checks, attach required files,
-sign and complete a check, review or remove completed evidence, and export a
-verifiable report. A fully populated one-click demo is isolated from real
-browser data.
+The completed sample is a view of the existing in-memory demo binder. It does
+not save to, read from, or replace the encrypted real binder. Reset restores
+the sample, and Start for real returns to the real binder gate. The two new
+file links have 44 px touch targets on phone.
 
-The prior corrupt-backup defect is closed. Every nested backup field is
-validated and normalized before confirmation or storage. Invalid JSON and the
-previous `records: [null]` case leave the open binder unchanged. Legacy data
-that decrypts but fails validation opens explicit restore and erase controls.
+A new public claim, `demo-completed-check`, has its own outcome-based browser
+test. It opens `/demo/` from a clean context, confirms the completed record,
+sign-off, completion time, two file links, and an actual download without
+opening History. The test also confirms that the record is in the initial
+viewport on desktop and phone.
 
-## Review finding disposition
+## Review history and current disposition
 
-| Finding | Disposition |
+| Finding | Status and evidence |
 | --- | --- |
-| F-01 corrupt backup could brick the binder | Fixed. Full schema validation precedes writes; a browser test rejects the prior payload and restores a deliberately corrupted encrypted vault. |
-| F-02 missing isolated demo | Fixed. `/demo/` loads realistic data in memory with a persistent label, reset, and exit to unchanged real data. |
-| F-03 untested public claims | Fixed. `.factory/claims.json` lists 14 claims, each with one unique passing `@claim:` test. |
-| F-04 unverifiable export fingerprint | Fixed. The report includes the exact UTF-8 manifest and each retained file hash; tests recompute both. |
-| F-05 broken paid checkout | User-facing defect removed. No sale or gate is shown, and all features are free. Product billing registration remains an external dependency. |
-| F-06 completed files unavailable | Fixed. Completed files can be downloaded or removed while filename history stays visible. |
-| F-07 phone lock hidden | Fixed. Lock remains visible and at least 44 px at 390 px. |
-| F-08 unclear first screen | Fixed. The job, audience, sample action, result, privacy, offline behavior, and price are visible before scrolling. |
-| F-09 missing structure and routes | Fixed. Added standard sections, navigation, shared footers, and history-backed app routes with route titles and focus changes. |
-| F-10 unknown URLs returned home with 200 | Fixed. Unknown paths return the designed Proofbook 404 with HTTP 404. |
-| F-11 small touch targets and zoom overflow | Fixed. Interactive targets meet 44 px; 390 px and 200% text checks have no horizontal overflow. |
-| F-12 raw JSON parser error | Fixed. Invalid files get a plain error that confirms the current binder was not replaced. |
-| F-13 short cache policy and unhashed app assets | Fixed. Vite emits hashed JS/CSS; `/assets/*` is immutable for one year; the service worker and HTML revalidate. |
-| F-14 missing response hardening | Fixed. Live CSP, frame restriction, Permissions-Policy, no-referrer, and nosniff headers were verified. |
-| F-15 incomplete route and share metadata | Fixed. Added canonical, Open Graph, Twitter, 1200 × 630 art, Apple icon, route titles, manifest MIME, and full sitemap. |
-| F-16 missing review documents | Fixed. Added demo, claims, copy audit, catalog description, deployment documentation, and this handoff. |
-| F-17 update transition untested | Fixed. A browser test installs an old worker, serves a changed build, calls update, and sees the reload action. |
+| F-01 corrupt backup could block unlock | Fixed. `backup-recovery` rejects malformed nested data before replacement and restores a deliberately damaged vault. |
+| F-02 no isolated sample | Fixed. `demo-isolation` proves the in-memory sample and reset leave an encrypted real vault unchanged. |
+| F-03 untested claims | Fixed. There are 15 registered claims with one unique tagged browser test each. |
+| F-04 unverifiable export integrity | Fixed. `export-integrity` recomputes the exact manifest and retained-file hashes. |
+| F-05 unavailable paid checkout | No broken offer is shown. The free core remains available while factory billing registration is unavailable; see Known dependency. |
+| F-06 completed files unavailable | Fixed. `file-control` downloads and removes a completed file while retaining its filename history. |
+| F-07 phone lock hidden | Fixed and covered by `encrypted-local`, including a 44 px visible lock control. |
+| F-08 unclear first screen | Fixed. Desktop and phone show the job, audience, sample action, result, and three facts before scrolling. |
+| F-09 missing structure and routes | Fixed. Shared navigation/footer, legal pages, route titles, history navigation, and route focus changes are covered by browser tests. |
+| F-10 unknown route returned home | Fixed. The deliberate unknown route returns the designed HTTP 404 page. |
+| F-11 touch targets and zoom overflow | Fixed. Browser tests cover 390 px, 200% text, and visible interactive target sizes. |
+| F-12 raw invalid-JSON message | Fixed. Invalid backups receive a plain safe error and retain the current binder. |
+| F-13 unhashed short-cache assets | Fixed. Vite assets are hashed and live JavaScript has one-year immutable caching. |
+| F-14 missing response hardening | Fixed. Live CSP, frame restriction, Permissions-Policy, no-referrer, nosniff, and X-Frame-Options are present. |
+| F-15 missing metadata and route details | Fixed. Route titles, canonical/share metadata, manifest MIME, sitemap, and designed 404 are covered. |
+| F-16 missing review documents | Fixed. Design, demo, claims, copy audit, catalog description, README, and this handoff are present. |
+| F-17 untested update transition | Fixed. The browser suite serves an updated worker and observes the reload action. |
+| F-18 sample did not show its completed check | Fixed. The initial demo now visibly contains the signed completed record and direct files; `demo-completed-check` tests that result. |
 
-All earlier verification findings map to F-01, F-07, F-12, F-13, F-14, and
-F-17 above and are closed. The previously passing normal workflow, offline,
-axe, console, and performance checks still pass.
+## Verification
 
-## Clean verification
-
-A new clone at implementation SHA `8837cfc` was created outside the repository.
-The documented sequence completed with Node 22.23.2 and npm 10.9.8:
+A separate clean clone of implementation `77b70aa` used Node 22.23.2 and npm
+10.9.8. The documented commands all passed:
 
 ```sh
 npm ci
@@ -59,107 +59,51 @@ npm run build
 npm run test:e2e
 ```
 
-Results:
+- Unit tests: 5 passed.
+- Production build: passed and produced `dist/index.html`.
+- Browser suite: 37 passed across desktop and 390 × 844 phone; one intentional
+  mobile skip remains for the desktop-only two-version worker update test.
+- Every command declared in `.factory/claims.json` was run separately from
+  that clean clone: all 15 passed.
+- Built main JavaScript: 41.48 KB raw / 13.44 KB gzip. CSS: 12.63 KB raw /
+  3.67 KB gzip.
 
-- dependency audit: 0 vulnerabilities;
-- unit tests: 5 passed;
-- production build: passed and created `dist/index.html`;
-- browser tests: 35 passed across desktop and 390 × 844 phone; the phone copy
-  intentionally skips the desktop-only service-worker update test;
-- built main JavaScript: 40.64 KB raw, 13.28 KB gzip;
-- built CSS: 11.96 KB raw, 3.55 KB gzip; and
-- all 14 commands in `.factory/claims.json`: passed individually from that
-  clean clone.
+The deployed build was verified against the production HTTPS asset:
 
-The later `2dcce9d` implementation commit only corrects the detected phone
-overflow and strengthens its browser assertion. That focused phone check
-passed before deployment. Commit `55ec495` only updates README and terms copy.
+- The live hashed main JavaScript SHA-256 matched the built file exactly:
+  `82e2f1927ba463e4927ffb611399caaa4d954c43d28761b778e4d80c3424da3c`.
+- The factory URL verifier passed: HTTPS 200, title, `lang`, one H1, main,
+  image alt text, and no console errors.
+- Fresh desktop and phone contexts confirmed the job, audience, and action
+  before scrolling; the persistent demo label; initial completed record and
+  two files; overdue item; reset; Start for real; only same-origin requests;
+  and no console or page errors.
+- Live axe WCAG 2 A/AA scans found no serious or critical findings on desktop
+  or phone. A fresh phone context reloaded the completed demo offline after
+  service-worker control.
+- The deliberate unknown live URL returned HTTP 404. The manifest uses
+  `application/manifest+json`; hashed assets are immutable for one year; and
+  the live security headers listed above are present.
+- Lighthouse 13.4.1 mobile: Performance 100, Accessibility 100, Best
+  Practices 100, SEO 100; FCP 0.98 s, LCP 1.24 s, TBT 0 ms, CLS 0.
 
-Browser coverage includes normal, invalid, size-boundary, retention, recovery,
-keyboard, dialog focus, back/forward, reduced motion, 200% text, touch targets,
-offline, update, request privacy, legal pages, metadata, link crawling, and
-designed 404 behavior. Playwright axe found no serious or critical WCAG 2 A/AA
-violations.
+Evidence includes `/work/.evidence/repair-2-live-desktop.png`,
+`/work/.evidence/repair-2-live-phone.png`,
+`/work/.evidence/repair-2-verify/verify.json`, and
+`/work/.evidence/repair-2-lighthouse.json`.
 
-## Live verification
+## Known dependency and scope
 
-The static build was deployed twice to the existing
-`sf-checklist-evidence-binder` app; the second deployment contains the phone
-overflow correction. The custom HTTPS domain returned 200 after deployment.
+The researched brief calls for a one-time purchase, but the product billing
+registration is still absent. Proofbook does not advertise or link to a
+checkout that cannot work, and all currently shipped features remain free.
+Factory billing registration, an exact registered price, and a verified
+license path are required before adding a paid offer or
+`/work/.evidence/billing-offer.json` metadata. No billing configuration,
+credentials, infrastructure, or external provider was changed here.
 
-- Factory URL verifier: passed with one H1, `lang`, main landmark, image alt,
-  and zero console errors.
-- Fresh 1366 × 900 desktop and 390 × 844 phone contexts: job, audience, and
-  sample action visible before scrolling; sample populated; banner persisted;
-  reset worked; real vault stayed absent; no overflow; no external requests;
-  no console errors; no serious or critical axe results.
-- Offline demo reload: passed in its own fresh browser context.
-- Unknown route: HTTP 404 with the designed page and return link.
-- Live manifest: `application/manifest+json`.
-- Live hashed JS: one-year immutable cache header.
-- Live response: CSP, `frame-ancestors 'none'`, Permissions-Policy,
-  X-Content-Type-Options, X-Frame-Options, and no-referrer policy present.
-- Built and live JavaScript, CSS, service worker, and manifest SHA-256 values
-  matched exactly.
-- Lighthouse mobile: performance 100, accessibility 100, best practices 100,
-  SEO 100; FCP 1.0 s, LCP 1.3 s, TBT 40 ms, CLS 0.
-
-Evidence is in `/work/.evidence/`, including desktop and phone screenshots,
-`live-browser-check.json`, `verify.json`, and `lighthouse.json`.
-
-## Known dependency
-
-The Sociobot billing endpoint for this slug is not registered and returns 404.
-Repository policy does not authorize creating billing infrastructure. Until the
-factory registers that product, Proofbook exposes no checkout and gates no
-features. After registration, reintroduce the one-time purchase through the
-documented Sociobot billing API and add a live checkout claim test.
-
-No AI feature was added because the local evidence workflow does not benefit
-from sending operational records to a model. This PWA has no backend, shared
-database, tenant, process restart, health, or 429 behavior to verify.
-
-## Independent verification 2
-
-Date: 2026-09-05
-
-Verification 2 reviewed implementation `55ec495d71f48c84a66fd5d041e811bcffb3c206`
-and documentation `c7eb3b811af4b4629e214e431f02a260d6701685`.
-
-**PASS — zero findings and zero untested claims.** A separate clean clone
-passed `npm ci`, `npm test` (5 unit tests), `npm run build`, and
-`npm run test:e2e` (35 passed, one intentional mobile skip). Every one of the
-14 exact commands in `.factory/claims.json` passed when run individually.
-
-The fresh live desktop and phone checks confirmed the job, audience, and
-sample action before scrolling; a populated persistent demo label; reset and
-real-data isolation; offline reload; no third-party requests or console
-errors; accessibility; privacy and legal pages; route titles; designed HTTP
-404; cache and security headers; and the deployed build identity. Lighthouse
-12.8.2 scored 100/100/100/100 (Performance/Accessibility/Best Practices/SEO).
-
-See `.factory/verification-2.md` for the complete evidence and the disposition
-of F-01 through F-17. No product code was changed by this verification.
-
-## Strict review 2
-
-Date: 2026-09-05
-
-Implementation candidate reviewed: `55ec495d71f48c84a66fd5d041e811bcffb3c206`.
-Documentation commit reviewed: `75a1995bf0cf72643ed0d627cf979289b6cf1bb8`.
-
-**FAIL — 1 finding and 1 untested public claim.** No product code was changed.
-
-The clean install, unit tests, build, full browser suite, and all fourteen
-declared claim commands passed. The live desktop and phone checks, offline
-reload, accessibility, privacy requests, routes, legal pages, designed 404,
-security headers, URL verifier, and Lighthouse (100/100/100/100) also passed.
-The deployed JS, CSS, and service-worker hashes exactly matched the fresh
-candidate build.
-
-The remaining issue is F-18 in `.factory/review-2.md`: the one-click sample
-action says it will show a completed check, but it opens on two overdue open
-checks. The completed record and its files require selecting **History** and
-**Review record**. Its wording in the landing page, README, and demo document
-must be made true, and the observable result must gain its own tagged claim
-test. Until then the product is not a strict-review PASS.
+This is a static, local-first PWA. It has no backend, shared database,
+tenant boundary, health endpoint, server restart state, or rate-limited API;
+the backend-specific tenant, restart, health, and 429 checks do not apply.
+No AI feature was added because the local evidence workflow has no need to
+send operational records to a model.
