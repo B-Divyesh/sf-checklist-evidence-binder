@@ -182,7 +182,7 @@ test('@claim:backup-recovery invalid imports preserve data and a legacy damaged 
   let confirmations = 0;
   page.on('dialog', dialog => { confirmations += 1; dialog.accept(); });
   await page.getByLabel('Restore a Proofbook JSON backup').setInputFiles({ name: 'bad.json', mimeType: 'application/json', buffer: Buffer.from('{"version":1,"procedures":[],"records":[null],"audit":[]}') });
-  await expect(page.getByText('This backup is invalid. Your current binder was not replaced.')).toBeVisible();
+  await expect(page.locator('.toast').filter({ hasText: 'This backup is invalid. Your current binder was not replaced.' })).toBeVisible();
   expect(confirmations).toBe(0);
   await binderTab(page, 'Open checks').click();
   await expect(page.getByRole('heading', { name: 'Recovery source check' })).toBeVisible();
