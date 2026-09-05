@@ -4,7 +4,7 @@ Date: 2026-09-05
 
 Live URL: <https://checklist-evidence-binder.sociobot.in>
 
-Implementation SHA deployed: `77b70aab31efb67a065f1d503ff90ca2c118ca4f`
+Implementation SHA deployed: `fb75d9e07955183ac95802cc470f7dca5a37e115`
 
 ## What changed
 
@@ -12,6 +12,8 @@ The one-click sample now keeps its promise on its initial Open checks view.
 It shows a completed cold-room check, completion time, Rae Morgan’s sign-off,
 and two direct downloadable evidence files before the visitor opens History.
 The same view retains the overdue fire-exit check and the next cold-room check.
+That next check is scheduled for tomorrow, so the landing promise of one
+overdue check stays true throughout the day.
 
 The completed sample is a view of the existing in-memory demo binder. It does
 not save to, read from, or replace the encrypted real binder. Reset restores
@@ -49,7 +51,7 @@ viewport on desktop and phone.
 
 ## Verification
 
-A separate clean clone of implementation `77b70aa` used Node 22.23.2 and npm
+A separate clean clone of implementation `fb75d9e` used Node 22.23.2 and npm
 10.9.8. The documented commands all passed:
 
 ```sh
@@ -71,7 +73,7 @@ npm run test:e2e
 The deployed build was verified against the production HTTPS asset:
 
 - The live hashed main JavaScript SHA-256 matched the built file exactly:
-  `82e2f1927ba463e4927ffb611399caaa4d954c43d28761b778e4d80c3424da3c`.
+  `da78c0129b5b929a5559d6d411f8e0ffa94bc745ffe5ce57846dd322948a417c`.
 - The factory URL verifier passed: HTTPS 200, title, `lang`, one H1, main,
   image alt text, and no console errors.
 - Fresh desktop and phone contexts confirmed the job, audience, and action
@@ -85,12 +87,12 @@ The deployed build was verified against the production HTTPS asset:
   `application/manifest+json`; hashed assets are immutable for one year; and
   the live security headers listed above are present.
 - Lighthouse 13.4.1 mobile: Performance 100, Accessibility 100, Best
-  Practices 100, SEO 100; FCP 0.98 s, LCP 1.24 s, TBT 0 ms, CLS 0.
+  Practices 100, SEO 100; FCP 0.91 s, LCP 1.21 s, TBT 0 ms, CLS 0.
 
-Evidence includes `/work/.evidence/repair-2-live-desktop.png`,
-`/work/.evidence/repair-2-live-phone.png`,
-`/work/.evidence/repair-2-verify/verify.json`, and
-`/work/.evidence/repair-2-lighthouse.json`.
+Evidence includes `/work/.evidence/repair-2-final-desktop.png`,
+`/work/.evidence/repair-2-final-phone.png`,
+`/work/.evidence/repair-2-final-verify/verify.json`, and
+`/work/.evidence/repair-2-final-lighthouse.json`.
 
 ## Known dependency and scope
 
