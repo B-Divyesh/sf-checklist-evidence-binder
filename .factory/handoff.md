@@ -140,3 +140,26 @@ errors; accessibility; privacy and legal pages; route titles; designed HTTP
 
 See `.factory/verification-2.md` for the complete evidence and the disposition
 of F-01 through F-17. No product code was changed by this verification.
+
+## Strict review 2
+
+Date: 2026-09-05
+
+Implementation candidate reviewed: `55ec495d71f48c84a66fd5d041e811bcffb3c206`.
+Documentation commit reviewed: `75a1995bf0cf72643ed0d627cf979289b6cf1bb8`.
+
+**FAIL — 1 finding and 1 untested public claim.** No product code was changed.
+
+The clean install, unit tests, build, full browser suite, and all fourteen
+declared claim commands passed. The live desktop and phone checks, offline
+reload, accessibility, privacy requests, routes, legal pages, designed 404,
+security headers, URL verifier, and Lighthouse (100/100/100/100) also passed.
+The deployed JS, CSS, and service-worker hashes exactly matched the fresh
+candidate build.
+
+The remaining issue is F-18 in `.factory/review-2.md`: the one-click sample
+action says it will show a completed check, but it opens on two overdue open
+checks. The completed record and its files require selecting **History** and
+**Review record**. Its wording in the landing page, README, and demo document
+must be made true, and the observable result must gain its own tagged claim
+test. Until then the product is not a strict-review PASS.
