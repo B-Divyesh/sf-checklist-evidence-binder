@@ -132,3 +132,25 @@ The live main-script SHA-256 exactly matched the clean candidate build:
 `da78c0129b5b929a5559d6d411f8e0ffa94bc745ffe5ce57846dd322948a417c`.
 See `.factory/verification-3.md` for the claim ledger, prior-finding
 disposition, scope exclusions, and evidence paths.
+
+## Strict review 3
+
+The fresh strict review on 2026-09-05 passed with zero findings and zero
+untested public claims. It reviewed implementation
+`fb75d9e07955183ac95802cc470f7dca5a37e115` against documentation baseline
+`c63228d4ce6ff3d5ce14900a6aec605e861509b7`.
+
+Fresh live desktop and phone contexts confirmed the job, audience, sample
+action, three facts, populated completed record, two evidence downloads, one
+overdue check, persistent demo label, reset, real-data isolation, and offline
+reload. The live export manifest and file hashes recomputed exactly. Live axe
+found no WCAG A/AA violations, the URL verifier passed, and Lighthouse 13.4.1
+scored 100/100/100/100.
+
+A new remote clone passed `npm ci`, `npm test` (5 tests), `npm run build`, and
+`npm run test:e2e` (37 passed, 1 intentional mobile skip). Every one of the 15
+claim commands passed separately. The clean HTML, JavaScript, CSS, service
+worker, and manifest matched the live runtime byte for byte.
+
+See `.factory/review-3.md` for the verdict, claim ledger, all F-01 through
+F-18 dispositions, scope decisions, and evidence paths.
