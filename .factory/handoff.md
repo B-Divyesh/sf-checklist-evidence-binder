@@ -1,106 +1,62 @@
-# Proofbook verification handoff — FAIL
+# Review recurring checks and evidence — handoff
 
-Verification work order: `checklist-evidence-binder-verify-1`
-Verified candidate: `30431363119a813f999a2c9ce4d07763ebe1129c`
-Verified live URL: https://checklist-evidence-binder.sociobot.in
-Date: 2026-08-28
+Work order: `checklist-evidence-binder-review-1`
 
-**Do not release this candidate.** A malformed but accepted JSON backup can
-overwrite the encrypted binder and make it impossible to unlock through the
-product UI. See `.factory/verification.md` for the exact payload and
-reproduction. The report also records the hidden 390 px Lock binder action,
-short deployment cache lifetime, and missing response-hardening policies.
+Date: 2026-09-05
 
-Verification completed without product-code changes. `npm ci`, `npm test`
-(3/3), the exact `npm run build`, and `npm run test:e2e` (6/6) pass, and the
-live static files exactly match the candidate. The normal full workflow,
-offline PWA reload, mobile/desktop axe scans, privacy/outbound-request check,
-keyboard/focus check, and Lighthouse audit were also run. Passing gates do not
-override the critical recovery/data-integrity failure.
+Verdict: **FAIL**
 
----
+Findings: **17**
 
-# Original build handoff (superseded by verification result)
+Untested public claims: **16**
 
-Work order: `checklist-evidence-binder-build-1`
-Completed: 2026-08-28
+The full independent report is `.factory/review-1.md`. Product code was not
+modified. The implementation candidate is
+`30431363119a813f999a2c9ce4d07763ebe1129c`; the reviewed documentation commit
+before this report is `12698cb79e22f35561a7ad9ee453becdb3c863a9`. Built and
+live HTML, JavaScript, CSS, service worker, and manifest matched byte for byte.
 
-## What shipped
+## What was reviewed
 
-- A Vite + vanilla TypeScript offline PWA with a product-specific cassette-era
-  zine visual system at desktop and 390 px mobile widths.
-- Passphrase onboarding and AES-GCM encrypted IndexedDB storage. The encryption
-  key is derived with PBKDF2 (SHA-256, 250,000 iterations) and is held only for
-  the open session.
-- Daily, weekly, and monthly procedures; named required evidence slots;
-  photo/document attachment; draft notes; operational sign-off; completion
-  timestamps; automatic next-cycle scheduling; overdue view; completion
-  history; and a local encrypted activity trail.
-- Retention choices of 30/90/365 days or manual deletion, with custom periods
-  in Plus. Expiry removes file payloads while preserving record metadata.
-- Readable JSON backup/import and standalone read-only HTML evidence bundles.
-  The bundle includes SHA-256 content hashes for each retained evidence file
-  and a SHA-256 fingerprint for the exported manifest.
-- PWA manifest, maskable icons, versioned service-worker app-shell cache,
-  network-first navigation, cache-first assets, offline fallback, and an update
-  notice. Offline reload is exercised in Chromium at desktop and 390 px.
-- Free edition with two active procedures and ungated core evidence/export;
-  US$29 one-time Plus unlock for unlimited procedures and custom retention.
-  Checkout, return-token capture, once-daily verification caching, optimistic
-  offline unlock, invalid-license downgrade, and paste-to-restore follow the
-  Sociobot billing contract. No payment provider is embedded.
-- Privacy and terms pages, MIT license, sitemap/robots, reduced-motion support,
-  designed focus states, skip link, semantic landmarks, and mobile-safe dialog
-  behavior.
-
-## Visual asset
-
-The original generated source, prompt metadata, and review are in
-`assets/src/`. Shipping variants are responsive AVIF (16/48 KB) and WebP
-(24/84 KB), all below the 300 KB hero budget. The asset was reviewed for
-pseudo-text, object errors, brands, seals, and misleading UI; none were found.
-Full palette, typography, spacing, interaction, motion, prompt, provenance, and
-the single-mode rationale are documented in `.factory/design.md`.
+- Fresh live desktop and 390 × 844 phone profiles.
+- First screen, missing demo route behavior, populated workflow, persistence,
+  exports, invalid inputs, limits, corrupt-import recovery, keyboard, focus,
+  reduced motion, 200% zoom, privacy traffic, offline reload, update evidence,
+  legal pages, links, metadata, headers, and unknown routes.
+- Every earlier verification item, including the low-severity items.
+- Every documented repository command and every public claim found in the
+  landing page, app, legal pages, README, and prior handoff.
 
 ## Verification
 
-From a clean checkout:
-
 ```sh
 npm ci
-npm run check
+npm test
+npm run build
+npm run test:e2e
+VERIFY_NODE_MODULES=/work/repo/node_modules /opt/fleet/lib/verify-url.sh \
+  https://checklist-evidence-binder.sociobot.in /work/.evidence
 ```
 
-Verified locally:
+All commands above pass: 3 unit tests, a production build in `dist/`, and 6
+browser tests. The current live Lighthouse scores are 100 performance, 100
+accessibility, 100 best practices, and 100 SEO; LCP is 1.3 s. Fresh live axe
+scans reported no WCAG 2 A/AA violations, and normal workflows had no console
+errors. Offline reload succeeds.
 
-- `npm test`: 3/3 unit tests pass.
-- `npm run build`: passes; output is `dist/` with `dist/index.html` at root.
-- Production payload: 33.1 KB JS / 9.7 KB CSS uncompressed; zero font bytes;
-  16 KB mobile AVIF hero.
-- `npm run test:e2e`: 6/6 Playwright tests pass across desktop Chromium and a
-  390 × 844 mobile viewport. The flow creates/unlocks the encrypted vault,
-  creates a recurring procedure, attaches both required files, signs and
-  completes it, and verifies history. Both first-run and populated binder views
-  have no serious/critical axe findings and no console/page errors.
-- Offline test: after initial install, both desktop and mobile reload the full
-  app with `context.setOffline(true)`.
-- Lighthouse 12.8.2 mobile/default audit against the production preview:
-  Performance 100, Accessibility 100, Best Practices 100, SEO 100. FCP 0.9 s,
-  LCP 1.6 s, TBT 0 ms, CLS 0, time to interactive 1.6 s.
-- Visual inspection performed on the generated hero and a full-page 390 px
-  first-run screenshot. No overflow, clipping, text collision, accidental
-  marks, or undersized primary controls observed.
+There are no claim commands to run because `.factory/claims.json` is missing.
+There are zero `@claim:` tests.
 
-## Known boundaries and next steps
+## Work still required
 
-- Proofbook intentionally has no sync, shared accounts, enterprise roles,
-  jurisdiction templates, or certification advice. Moving devices requires a
-  backup import and, for Plus, pasting the license.
-- A forgotten passphrase cannot be recovered. JSON backups and exported HTML
-  are readable by design, so the UI warns users to protect exported files.
-- Browser storage quotas vary; each evidence file is capped at 8 MB. A future
-  version could show estimated binder storage before users reach quota.
-- The factory must register/switch the paid product configuration at release;
-  the app contains only the slug-based Sociobot API contract and no product ID.
-- Deployment, DNS, billing registration, and external production smoke tests
-  remain factory responsibilities and were not changed from this repository.
+Do not release this candidate. Fix the critical schema-validation and recovery
+defect first. Then add the isolated one-click sample, claim registry and tests,
+verifiable export manifest, working product checkout, completed-file access
+and deletion, phone lock action, plain first screen, required routes and 404,
+mobile accessibility fixes, metadata, caching, security headers, required
+documents, and an end-to-end update test. Re-run every claim command and the
+full live review after deployment.
+
+Evidence is under `/work/.evidence/`. The required report copy and result JSON
+are written there. No product source, live configuration, or real user data
+was changed.
