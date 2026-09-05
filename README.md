@@ -32,9 +32,8 @@ not read or write the real IndexedDB vault.
 - Lets the owner download or remove completed files and erase the full binder.
 - Installs as a standalone PWA and reloads offline after the first visit.
 
-All features in this release are free to use. The researched business model is
-a one-time purchase, but the external product checkout is not registered. No
-dead purchase link or mock payment flow is shown.
+All features in this release are free to use. The one-time paid option in the
+research brief is deferred until product billing is registered.
 
 ## Privacy and recovery
 
