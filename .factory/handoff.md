@@ -118,3 +118,25 @@ documented Sociobot billing API and add a live checkout claim test.
 No AI feature was added because the local evidence workflow does not benefit
 from sending operational records to a model. This PWA has no backend, shared
 database, tenant, process restart, health, or 429 behavior to verify.
+
+## Independent verification 2
+
+Date: 2026-09-05
+
+Verification 2 reviewed implementation `55ec495d71f48c84a66fd5d041e811bcffb3c206`
+and documentation `c7eb3b811af4b4629e214e431f02a260d6701685`.
+
+**PASS — zero findings and zero untested claims.** A separate clean clone
+passed `npm ci`, `npm test` (5 unit tests), `npm run build`, and
+`npm run test:e2e` (35 passed, one intentional mobile skip). Every one of the
+14 exact commands in `.factory/claims.json` passed when run individually.
+
+The fresh live desktop and phone checks confirmed the job, audience, and
+sample action before scrolling; a populated persistent demo label; reset and
+real-data isolation; offline reload; no third-party requests or console
+errors; accessibility; privacy and legal pages; route titles; designed HTTP
+404; cache and security headers; and the deployed build identity. Lighthouse
+12.8.2 scored 100/100/100/100 (Performance/Accessibility/Best Practices/SEO).
+
+See `.factory/verification-2.md` for the complete evidence and the disposition
+of F-01 through F-17. No product code was changed by this verification.
