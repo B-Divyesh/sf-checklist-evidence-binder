@@ -85,7 +85,7 @@ button:disabled { cursor: not-allowed; opacity: .55; transform: none; box-shadow
 .steps li { counter-increment: steps; padding-top: 12px; border-top: 5px solid var(--teal); }
 .steps li::before { content: "0" counter(steps); display: block; color: var(--oxide-dark); font-weight: 700; }
 .steps strong, .steps span { display: block; }
-.limits { background: var(--sheet); margin-inline: -24px; padding-inline: 24px; }
+.limits { background: var(--sheet); padding-inline: 24px; }
 
 label, .slot-label { display: block; font-weight: 700; margin: 0 0 6px; }
 .required { color: var(--danger); font-size: .8rem; }
@@ -160,6 +160,7 @@ dialog::backdrop { background: rgba(23,24,20,.72); }
   .site-nav { order: 3; width: 100%; }
   .hero { grid-template-columns: minmax(0, 1fr); gap: 32px; padding-top: 32px; }
   .hero-art { justify-self: center; max-width: 400px; }
+  .hero-art { width: calc(100% - 12px); }
   .binder { grid-template-columns: minmax(0, 1fr); gap: 20px; }
   .tabs { position: static; flex-direction: row; overflow-x: auto; padding: 3px 3px 8px; }
   .tab { flex: 0 0 auto; }

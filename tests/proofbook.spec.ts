@@ -323,6 +323,7 @@ test('normal workflow, keyboard focus, responsive zoom, routes, and accessibilit
   await expect(page).toHaveURL(/view=history/);
   await page.goBack();
   await expect(page.getByRole('heading', { level: 1, name: 'Open checks' })).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth)).toBe(true);
   await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth)).toBe(true);
   const targets = await page.locator('a,button').evaluateAll(elements => elements.filter(element => {
