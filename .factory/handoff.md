@@ -109,3 +109,26 @@ tenant boundary, health endpoint, server restart state, or rate-limited API;
 the backend-specific tenant, restart, health, and 429 checks do not apply.
 No AI feature was added because the local evidence workflow has no need to
 send operational records to a model.
+
+## Verification 3
+
+Independent verification completed on 2026-09-05 against implementation
+`fb75d9e07955183ac95802cc470f7dca5a37e115` and documentation
+`66d4ecb2f1f69d9852062996883d59a483a690d6`.
+
+Verdict: **PASS — zero findings and zero untested claims.** A separate clean
+clone passed `npm ci`, `npm test` (5 tests), `npm run build`, and
+`npm run test:e2e` (37 passed, 1 intentional mobile skip). Every one of the
+15 declared claim commands was run individually and passed.
+
+Fresh live desktop and phone contexts confirmed the job, audience, and sample
+action before scrolling. `/demo/` immediately showed the signed cold-room
+sample with two downloads and exactly one overdue fire-exit check; its label,
+reset, and real-data gate worked. Live accessibility, keyboard, offline,
+privacy-request, legal-route, 404, header, and URL-verifier checks passed.
+Lighthouse 13.4.1 mobile was 100/100/100/100.
+
+The live main-script SHA-256 exactly matched the clean candidate build:
+`da78c0129b5b929a5559d6d411f8e0ffa94bc745ffe5ce57846dd322948a417c`.
+See `.factory/verification-3.md` for the claim ledger, prior-finding
+disposition, scope exclusions, and evidence paths.
