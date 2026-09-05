@@ -66,6 +66,20 @@ test('@claim:demo-isolation sample data resets and never changes a real binder',
   await expect(page.getByRole('heading', { name: 'Real sanitiser check' })).toBeVisible();
 });
 
+test('@claim:demo-completed-check the sample opens on a signed completed check with two downloadable files', async ({ page }) => {
+  await page.goto('/demo/');
+  const completed = page.getByRole('region', { name: 'Completed check ready to review' });
+  await expect(completed).toBeInViewport();
+  await expect(completed.getByText('Cold room opening check', { exact: true })).toBeVisible();
+  await expect(completed.getByText('Signed by Rae Morgan', { exact: true })).toBeVisible();
+  await expect(completed.locator('.meta > span').first()).toHaveText(/^Completed /);
+  const files = completed.getByRole('link', { name: /^Download cold-room-display\.txt$|^Download opening-log\.txt$/ });
+  await expect(files).toHaveCount(2);
+  const pending = page.waitForEvent('download');
+  await files.first().click();
+  expect((await pending).suggestedFilename()).toBe('cold-room-display.txt');
+});
+
 test('@claim:encrypted-local local payload is encrypted and the passphrase is not stored', async ({ page }) => {
   await createBinder(page);
   await addProcedure(page, 'Private compressor reading');

@@ -13,10 +13,10 @@ One-click sample: <https://checklist-evidence-binder.sociobot.in/demo/>
 
 ## Try the sample
 
-Open `/demo/` to see a completed cold-room check, its two evidence files, the
-next daily check, and an overdue fire-exit walk. The persistent demo banner
-offers **Reset demo** and **Start for real**. Demo changes stay in memory and do
-not read or write the real IndexedDB vault.
+Open `/demo/` to immediately see a completed cold-room check, its two
+downloadable evidence files, the next daily check, and an overdue fire-exit
+walk. The persistent demo banner offers **Reset demo** and **Start for real**.
+Demo changes stay in memory and do not read or write the real IndexedDB vault.
 
 ## What it does
 

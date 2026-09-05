@@ -210,10 +210,18 @@ function renderView(): string {
   const completed = binder!.records.filter(record => record.status === 'complete').length;
   const onTime = binder!.records.filter(record => record.status === 'complete' && record.completedAt! <= record.dueAt).length;
   const rate = completed ? Math.round(onTime / completed * 100) : 0;
-  return `<div class="status-strip" aria-label="Binder status"><div class="stat"><strong>${open.length}</strong><span>open now</span></div><div class="stat overdue"><strong>${open.filter(record => isOverdue(record)).length}</strong><span>past due</span></div><div class="stat"><strong>${rate}%</strong><span>completed on time</span><progress value="${rate}" max="100">${rate}%</progress></div></div>${records.length ? `<div class="check-list">${records.map(checkCard).join('')}</div>` : emptyView()}`;
+  return `${demoMode && view === 'today' ? completedSampleOverview() : ''}<div class="status-strip" aria-label="Binder status"><div class="stat"><strong>${open.length}</strong><span>open now</span></div><div class="stat overdue"><strong>${open.filter(record => isOverdue(record)).length}</strong><span>past due</span></div><div class="stat"><strong>${rate}%</strong><span>completed on time</span><progress value="${rate}" max="100">${rate}%</progress></div></div>${records.length ? `<div class="check-list">${records.map(checkCard).join('')}</div>` : emptyView()}`;
 }
 
 function procedure(record: CheckRecord): Procedure | undefined { return binder!.procedures.find(item => item.id === record.procedureId); }
+
+function completedSampleOverview(): string {
+  const record = binder!.records.find(item => item.status === 'complete');
+  if (!record) return '';
+  const proc = procedure(record);
+  const files = Object.values(record.evidence).filter(hasRetainedEvidence);
+  return `<section class="completed-sample" aria-labelledby="completed-sample-title"><div><p class="kicker">Completed sample</p><h2 id="completed-sample-title">Completed check ready to review</h2><p class="completed-sample-name">${html(proc?.title || 'Archived procedure')}</p><div class="meta"><span>Completed <span class="tabular">${when(record.completedAt || record.dueAt)}</span></span>${record.signedBy ? `<span>Signed by ${html(record.signedBy)}</span>` : ''}</div><ul class="sample-files" aria-label="Completed evidence files">${files.map(file => `<li><a download="${html(file.name)}" href="${html(file.data)}">Download ${html(file.name)}</a></li>`).join('')}</ul></div><button data-record="${record.id}">Review completed check</button></section>`;
+}
 
 function checkCard(record: CheckRecord): string {
   const proc = procedure(record);

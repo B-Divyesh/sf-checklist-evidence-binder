@@ -3,10 +3,10 @@
 Demo URL: <https://checklist-evidence-binder.sociobot.in/demo/>
 
 The **Try it with sample data** link on the first screen opens this route in one
-click. The demo immediately shows:
+click. Its initial Open checks view immediately shows a completed cold-room
+record, named sign-off, completion time, and its two downloadable files. The
+same view also shows:
 
-- a completed cold-room opening check signed by Rae Morgan;
-- two downloadable evidence text files;
 - the next daily cold-room check;
 - an overdue weekly fire-exit walk; and
 - sample activity and a 365-day retention setting.

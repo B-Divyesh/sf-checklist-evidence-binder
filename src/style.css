@@ -110,6 +110,12 @@ textarea { min-height: 92px; resize: vertical; }
 progress { display: block; width: 100%; height: 10px; margin-top: 8px; accent-color: var(--teal); }
 
 .check-list { display: grid; gap: 18px; }
+.completed-sample { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 20px; margin: 24px 0; padding: 18px 20px; background: #e2eee8; border: 3px solid var(--teal); box-shadow: 4px 4px 0 var(--ink); }
+.completed-sample h2 { font-size: clamp(1.25rem, 2.5vw, 1.7rem); margin-bottom: 6px; }
+.completed-sample-name { margin: 0; font-weight: 700; }
+.completed-sample .meta { margin-top: 4px; }
+.sample-files { display: flex; flex-wrap: wrap; gap: 4px 16px; margin: 10px 0 0; padding-left: 20px; font-size: .88rem; }
+.sample-files a { display: inline-flex; align-items: center; min-height: 44px; padding: 4px 0; }
 .check-card { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px; padding: 22px; background: var(--sheet); border: 2px solid var(--ink); box-shadow: 4px 4px 0 #c3bca9; clip-path: polygon(0 0, calc(100% - 13px) 0, 100% 13px, 100% 100%, 0 100%); }
 .check-card.overdue { border-left: 8px solid var(--warning); }
 .check-card.complete { border-left: 8px solid var(--teal); }
@@ -169,6 +175,8 @@ dialog::backdrop { background: rgba(23,24,20,.72); }
   .stat + .stat { border-left: 0; border-top: 2px solid var(--ink); }
   .check-card { grid-template-columns: minmax(0, 1fr); }
   .check-card > button { justify-self: start; }
+  .completed-sample { grid-template-columns: minmax(0, 1fr); }
+  .completed-sample > button { justify-self: start; }
   .settings-grid { grid-template-columns: minmax(0, 1fr); }
   .settings-card.full { grid-column: auto; }
   .binder-head { flex-direction: column; }

@@ -7,6 +7,13 @@
     "sandbox": "create a real encrypted binder, use and reset the in-memory demo, compare the encrypted vault byte-for-byte, then reopen the real binder"
   },
   {
+    "id": "demo-completed-check",
+    "claim": "The sample opens with a completed cold-room check, sign-off, timestamp, and two downloadable evidence files.",
+    "where": "landing action, README, demo documentation",
+    "test": "npm run test:claims -- --grep @claim:demo-completed-check",
+    "sandbox": "open /demo/ from a fresh browser context and verify the visible completed sample record, named sign-off, completion time, two file links, and a file download without opening History"
+  },
+  {
     "id": "encrypted-local",
     "claim": "The binder payload is encrypted with AES-GCM in browser IndexedDB, and the passphrase is not stored.",
     "where": "landing, unlock form, privacy, README",
