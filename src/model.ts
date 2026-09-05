@@ -113,7 +113,7 @@ export function sampleBinder(now = new Date()): Binder {
         'Opening log': textFile('opening-log.txt', 'Door seal clear. Alarm tested.', at(-1, 9))
       }
     },
-    { id: 'demo-next', procedureId: 'demo-cold-room', dueAt: at(0, 10), status: 'open', evidence: {}, notes: '', signedBy: '' },
+    { id: 'demo-next', procedureId: 'demo-cold-room', dueAt: at(1, 10), status: 'open', evidence: {}, notes: '', signedBy: '' },
     { id: 'demo-overdue', procedureId: 'demo-fire-exit', dueAt: at(-1, 15), status: 'open', evidence: {}, notes: '', signedBy: '' }
   ];
   return {

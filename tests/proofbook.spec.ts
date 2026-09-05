@@ -156,6 +156,7 @@ test('@claim:recurring-required-evidence required files block completion and the
 
 test('@claim:signed-overdue-history demo shows an overdue check and a signed timestamped record', async ({ page }) => {
   await page.goto('/demo/');
+  await expect(binderTab(page, 'Overdue')).toContainText('1');
   await binderTab(page, 'Overdue').click();
   await expect(page.getByRole('heading', { name: 'Weekly fire exit walk' })).toBeVisible();
   await expect(page.locator('article').filter({ has: page.getByRole('heading', { name: 'Weekly fire exit walk' }) }).getByText('! Overdue')).toBeVisible();

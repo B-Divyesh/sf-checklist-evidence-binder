@@ -50,10 +50,10 @@
   },
   {
     "id": "signed-overdue-history",
-    "claim": "Proofbook shows overdue checks and keeps completion and sign-off timestamps.",
-    "where": "demo, README",
+    "claim": "Proofbook shows the sample's one overdue fire-exit check and keeps completion and sign-off timestamps.",
+    "where": "landing action, demo, README",
     "test": "npm run test:claims -- --grep @claim:signed-overdue-history",
-    "sandbox": "open the sample overdue view and signed history, then assert the named operator and completed timestamp"
+    "sandbox": "open the sample overdue view, assert its single named fire-exit check, then open signed history and assert the named operator and completed timestamp"
   },
   {
     "id": "retention-history",
